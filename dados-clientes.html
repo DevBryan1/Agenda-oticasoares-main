@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style-dados.css">
+    <title>Agenda Ótica | OS</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box-left">
+            <a class="logo-link" href="index.html"><img width="60%" src="./assets/Logo Loja.png" alt="Logo Loja"></a>
+            <div class="search-icons">
+                <input class="search-input" type="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <a href="dados-clientes.html"><button class="button-menu">Dados Do Cliente</button></a>
+            <a href="armacoes.html"><button class="button-menu">Armações</button></a>
+            <a href="produtos.html"><button class="button-menu">Produtos</button></a>
+            <a href="tratamentos.html"><button class="button-menu">Tratamentos</button></a>
+            <a href="receita.html"><button class="button-menu">Receita</button></a>
+        </div>
+        
+        <div class="box-right">
+            <h1>Dados do cliente</h1>  
+            <!--<img src="#" height="200" alt="" id="receitaCarregada">-->   
+            <form action="classes/dados.php" class="formulario"  method="post" id="dados" enctype="multipart/form-data">
+                    <div class="name">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="telefone">
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="email">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="coment">
+                        <label class="coment" for="comentario">Comentário:</label>
+                        <textarea name="comentario" id="coment" cols="23" rows="5"></textarea>
+                    </div>
+
+                    <input type="file" class="input_file" name="receita" id="receita">
+                    <div class="btn_add_img">selecionar receita</div>
+
+                    <div class="buttons">
+                      <button class="btnSalvar">Salvar Dados</button>
+                      <button class="btnLimpar">Limpar Dados</button>
+                    </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="assets/fonticons/js/all.min.js"></script>
+    <script>
+        $('#telefone').mask('(00) 00000-0000');  
+        $(document).ready(function(){
+
+            $('#dados').on('submit', function(ee){
+                ee.preventDefault();
+                var data = new FormData();
+
+                var arquivo = $('#receita')[0].files;
+
+                data.append('name', $('#name').val());
+                data.append('email', $('#email').val());
+                data.append('telefone', $('#telefone').val());
+                data.append('comentario', $('#coment').val());
+
+                if(arquivo.length > 0){
+                    data.append('arquivo', arquivo[0]);
+                }else{
+                    data.append('arquivo', 'null');
+                }
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function(){
+                        console.log('enviando...');
+                    },
+                    success: function(dados){
+                        if(dados == '302'){
+                            //email ja existente
+                            alert('Email ja existente');
+                        }else if(dados == '200'){
+                            //adicionado com sucesso
+                            alert('Cliente adicionado com sucesso');
+                            $('#name').val('');
+                            $('#telefone').val('');
+                            $('#email').val('');
+                            $('#coment').val('');
+                            $('#receita').val('');
+                        }else if(dados == '404'){
+                            //sem dados
+                            alert('Preencha as informações corretamente');
+                        }
+                    }
+                })
+            });
+
+            $('.btnLimpar').on('click', function(e){
+                e.preventDefault();
+                $('#name').val('');
+                $('#telefone').val('');
+                $('#email').val('');
+                $('#coment').val('');
+                $('#receita').val('');
+            });
+
+            $('.btn_add_img').on('click', function(){
+                $('#receita').click();
+            });
+
+            $('#receita').on('change', function(){
+                var nomearquivo = $('#receita').val();
+                
+                const file = this.files[0];
+                if (file){
+                    let reader = new FileReader();
+                    reader.onload = function(event){
+                        $('#receitaCarregada').attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

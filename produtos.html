@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style-produtos.css">
+    <title>Agenda Ótica | OS</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box-left">
+            <a class="logo-link" href="index.html"><img width="60%" src="./assets/Logo Loja.png" alt="Logo Loja"></a>
+            <div class="search-icons">
+                <input type="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <a href="dados-clientes.html"><button class="button-menu">Dados Do Cliente</button></a>
+            <a href="armacoes.html"><button class="button-menu">Armações</button></a>
+            <a href="produtos.html"><button class="button-menu">Produtos</button></a>
+            <a href="tratamentos.html"><button class="button-menu">Tratamentos</button></a>
+            <a href="receita.html"><button class="button-menu">Receita</button></a>
+        </div>
+        <div class="box-right">
+            
+            <div class="card">
+                <ul>
+                    <li class="list_style" data-ref="variluz" data-url="https://drive.google.com/file/d/1Vjs5r2Dc3QaBrdtFjhj4WVa-scmoA2y2/preview" data-title="Lentes Varilux"><i class="fa-regular fa-file-pdf"></i>Lentes Varilux</li>
+                    <li class="list_style" data-ref="kodak" data-url="https://drive.google.com/file/d/1uwFdMOreErLyFfq-_Ju-I3MFZh7Eeb4u/preview" data-title="Lentes Kodak"><i class="fa-regular fa-file-pdf"></i>Lentes Kodak</li>
+                    <li class="list_style" data-ref="zeiss" data-url="https://drive.google.com/file/d/18RBU8dcPYEyOV5jeKUbizpIMmZxG9bSK/preview" data-title="Lentes Zeiss"><i class="fa-regular fa-file-pdf"></i>Lentes Zeiss</li>
+                    <li class="list_style" data-ref="essilor" data-url="https://drive.google.com/file/d/1tCfkcbWeGkeUasZ2fGHEAfFtshwwcPj5/preview" data-title="Tabela Essilor"><i class="fa-regular fa-file-pdf"></i>Tabela de preço Essilor</li>
+                    <!--aqui dentro ta a tag data-url-->
+                    <li class="list_style" data-ref="hoya" data-url="https://drive.google.com/file/d/1_xWO9tOpv_ZylfNVfdKCXhdZntv2cXWD/preview" data-title="Tabela Hoya"><i class="fa-regular fa-file-pdf"></i>Tabela de preço Hoya</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box_shadow_pop">
+            <div class="area_doc">
+                <div class="top_doc">
+                    <p id="titlePop">Título do documento</p>
+                    <i class="fa-solid fa-xmark" id="ClosedX"></i>
+                </div>
+                <!--iframe ali no src="" vai o link do PDF que é colocado pelo javascript-->
+                <iframe class="body_doc" src="">
+
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+    <script src="assets/fonticons/js/all.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('.list_style').each(function(index){
+            var doc = $(this).attr('data-ref');
+            //aqui peg o link do PDF que ta dentro da tag data-url
+            var link = $(this).attr('data-url');
+            var title = $(this).attr('data-title');
+            $(this).on('click', function(){
+                $('#titlePop').html(title);
+                $('.body_doc').attr('src', link);
+                OpenModalPop();
+            });
+        });
+        $('.box_shadow_pop').on('click', function(){
+            ClosedModalPop();
+        });
+        $('.ClosedX').on('click', function(){
+            ClosedModalPop();
+        });
+
+        function OpenModalPop(){
+            $('.box_shadow_pop').css('display', 'flex');
+        }
+        function ClosedModalPop(){
+            $('.box_shadow_pop').css('display', 'none');
+            $('.body_doc').attr('src', '');
+        }
+    });
+  </script>
+</body>
+</html>
