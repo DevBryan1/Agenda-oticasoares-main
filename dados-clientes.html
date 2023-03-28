@@ -73,6 +73,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="assets/fonticons/js/all.min.js"></script>
     <script>
+       function ClosedModalPop(){
+            $('.previewPopUp').css('display','none');
+            $('.receitaCarregada').attr('src', '');
+        }
+
+        function openModal(){
+            $('.previewPopUp').css('display','flex');
+        }
+
+        $('.previewPopUp').on('click',function(){
+            ClosedModalPop();
+        });
+        $('.ClosedX').on('click',function(){
+            ClosedModalPop();
+        });
+
         $('#telefone').mask('(00) 00000-0000');  
         $(document).ready(function(){
 
@@ -152,21 +168,7 @@ openModal ();
 
         });
 
-        function ClosedModalPop(){
-            $('.previewPopUp').css('display','none');
-            $('.receitaCarregada').attr('src', '');
-        }
-
-        function openModal(){
-            $('.previewPopUp').css('display','flex');
-        }
-
-        $('.previewPopUp').on('click',function(){
-            ClosedModalPop();
-        });
-        $('.ClosedX').on('click',function(){
-            ClosedModalPop();
-        });
+ 
 
     </script>
 
