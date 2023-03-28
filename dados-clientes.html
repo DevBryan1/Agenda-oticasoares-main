@@ -142,8 +142,10 @@
                     let reader = new FileReader();
                     reader.onload = function(event){
                         $('#receitaCarregada').attr('src', event.target.result);
+openModal ();
+
                     }
-                      openModal ();
+                      
                     reader.readAsDataURL(file);
                 }
             });
