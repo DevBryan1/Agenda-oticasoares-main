@@ -10,13 +10,11 @@
 <body>
     <div class="previewPopUp">
         <div class="bodyPopUp">
+            <img src="#" height="200" alt="" id="receitaCarregada">
             <div class="topPopUp">
                 <div class="clickClosed">
                     <i class="fa-solid fa-xmark" id="ClosedX"></i>
                 </div>
-            </div>
-            <div class="imageReceita">
-                
             </div>
         </div>
     </div>
@@ -150,7 +148,26 @@
             });
 
         });
+
+        function ClosedModalPop(){
+            $('.previewPopUp').css('display','none');
+            $('.receitaCarregada').attr('src', '');
+        }
+
+        function openModal(){
+            $('.previewPopUp').css('display','flex');
+        }
+
+        $('.previewPopUp').on('click',function(){
+            ClosedModalPop();
+        });
+        $('.ClosedX').on('click',function(){
+            ClosedModalPop();
+        });
+
+       
     </script>
-<script src="assets/fonticons/js/all.min.js"></script>
+
+    <script src="assets/fonticons/js/all.min.js"></script>
 </body>
 </html>
