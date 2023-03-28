@@ -143,6 +143,7 @@
                     reader.onload = function(event){
                         $('#receitaCarregada').attr('src', event.target.result);
                     }
+                      openModal ();
                     reader.readAsDataURL(file);
                 }
             });
@@ -164,8 +165,6 @@
         $('.ClosedX').on('click',function(){
             ClosedModalPop();
         });
-
-        openModal();
 
     </script>
 
