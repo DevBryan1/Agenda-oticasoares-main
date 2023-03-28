@@ -183,6 +183,7 @@ a,a:link, a:active, a:visited {
     left: 0;
     top: 0;
     z-index: 10;
+    display: none;
 }
 .bodyPopUp  {
     border-radius: 10px;
